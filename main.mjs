@@ -7,7 +7,9 @@ const PORT = process.env.PORT || 3000;
 
 app.use(koaBody());
 app.use((ctx) => {
-  ctx.body = ctx.request.body;
+  const { body } = ctx.request;
+  console.log(body);
+  ctx.body = body;
 });
 
 app.listen(PORT);
