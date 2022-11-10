@@ -8,4 +8,4 @@ app.use((ctx) => {
   ctx.body = ctx.request.body;
 });
 
-app.listen(3000);
+app.listen(process.env.PORT);
