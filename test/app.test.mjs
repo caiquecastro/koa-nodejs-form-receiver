@@ -17,7 +17,17 @@ describe('App', () => {
     it('should load all parameters from body', async () => {
         const response = await request(server)
             .post('/')
-            .type('form')
+            .send('name=John&age=20');
+
+        assert.deepEqual(response.body, {
+            name: 'John',
+            age: '20',
+        });
+    });
+
+    it('should load multiple fields with same name as array', async () => {
+        const response = await request(server)
+            .post('/')
             .send('name=value1&name=value2');
 
         assert.deepEqual(response.body, {
