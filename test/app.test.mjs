@@ -20,8 +20,11 @@ describe('App', () => {
             .send('name=John&age=20');
 
         assert.deepEqual(response.body, {
-            name: 'John',
-            age: '20',
+            method: 'POST',
+            body: {
+                name: 'John',
+                age: '20',
+            }
         });
     });
 
@@ -31,7 +34,10 @@ describe('App', () => {
             .send('name=value1&name=value2');
 
         assert.deepEqual(response.body, {
-            name: ['value1', 'value2'],
+            method: 'POST',
+            body: {
+                name: ['value1', 'value2'],
+            }
         });
     });
 });
