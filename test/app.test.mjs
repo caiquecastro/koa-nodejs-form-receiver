@@ -1,6 +1,6 @@
 import { app } from '../app.mjs';
 import request from 'supertest';
-import { assert } from 'node:assert';
+import { strict as assert } from 'node:assert';
 
 describe('App', () => {
   let server;
