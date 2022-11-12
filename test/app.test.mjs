@@ -1,6 +1,6 @@
 import { app } from '../app.mjs';
 import request from 'supertest';
-import { strict as assert } from 'node:assert';
+import { assert } from 'node:assert';
 
 describe('App', () => {
     let server;
@@ -19,12 +19,11 @@ describe('App', () => {
             .post('/')
             .send('name=John&age=20');
 
-        assert.deepEqual(response.body, {
-            method: 'POST',
-            body: {
-                name: 'John',
-                age: '20',
-            }
+        assert.deepStrictEqual(Object.keys(response.body), ['method', 'headers', 'body']);
+        assert.deepStrictEqual(response.body.method, 'POST');
+        assert.deepStrictEqual(response.body.body, {
+            name: 'John',
+            age: '20',
         });
     });
 
@@ -33,11 +32,8 @@ describe('App', () => {
             .post('/')
             .send('name=value1&name=value2');
 
-        assert.deepEqual(response.body, {
-            method: 'POST',
-            body: {
-                name: ['value1', 'value2'],
-            }
+        assert.deepStrictEqual(response.body.body, {
+            name: ['value1', 'value2'],
         });
     });
 });
